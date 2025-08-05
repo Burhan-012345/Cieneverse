@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineVerse Admin Dashboard</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="css/adashboard.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>CineVerse</h2>
+                <p>Admin Dashboard</p>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="active" data-tab="dashboard">
+                    <i class='bx bxs-dashboard'></i>
+                    <span>Dashboard</span>
+                </li>
+                <li data-tab="movies">
+                    <i class='bx bxs-movie'></i>
+                    <span>Movies</span>
+                </li>
+                <li data-tab="tvshows">
+                    <i class='bx bxs-tv'></i>
+                    <span>TV Shows</span>
+                </li>
+                <li data-tab="users">
+                    <i class='bx bxs-user'></i>
+                    <span>Users</span>
+                </li>
+                <li data-tab="reports">
+                    <i class='bx bxs-report'></i>
+                    <span>Reports</span>
+                </li>
+                <li data-tab="settings">
+                    <i class='bx bxs-cog'></i>
+                    <span>Settings</span>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <div class="admin-profile">
+                    <img src="https://source.unsplash.com/random/100x100/?portrait" alt="Admin">
+                    <div>
+                        <h4>Admin User</h4>
+                        <p>Super Admin</p>
+                    </div>
+                </div>
+                <button class="logout-btn">
+                    <i class='bx bx-log-out'></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="admin-header">
+                <div class="header-left">
+                    <h1 id="current-tab">Dashboard</h1>
+                    <div class="breadcrumb">
+                        <span>Admin</span>
+                        <i class='bx bx-chevron-right'></i>
+                        <span id="current-breadcrumb">Dashboard</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search...">
+                        <i class='bx bx-search'></i>
+                    </div>
+                    <div class="notifications">
+                        <i class='bx bxs-bell'></i>
+                        <span class="badge">3</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Tab -->
+            <div class="tab-content active" id="dashboard-tab">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class='bx bxs-user'></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Users</h3>
+                            <p id="total-users">1,245</p>
+                            <span class="stat-change up">+12% from last month</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class='bx bxs-movie'></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Movies</h3>
+                            <p id="total-movies">356</p>
+                            <span class="stat-change up">+5% from last month</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class='bx bxs-tv'></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total TV Shows</h3>
+                            <p id="total-tvshows">128</p>
+                            <span class="stat-change up">+8% from last month</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class='bx bxs-bar-chart-alt-2'></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Active Viewers</h3>
+                            <p id="active-viewers">842</p>
+                            <span class="stat-change down">-3% from last month</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class='bx bxs-report'></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Pending Reports</h3>
+                            <p id="pending-reports">8</p>
+                            <span class="stat-change up">+2 from yesterday</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-container">
+                    <div class="chart-card">
+                        <h3>User Growth</h3>
+                        <div class="chart" id="user-growth-chart">
+                            <canvas id="userGrowthChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Content Views</h3>
+                        <div class="chart" id="content-views-chart">
+                            <canvas id="contentViewsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class='bx bxs-user-plus'></i>
+                            </div>
+                            <div class="activity-details">
+                                <p>New user registered: <strong>John Doe</strong></p>
+                                <span class="activity-time">2 minutes ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class='bx bxs-movie'></i>
+                            </div>
+                            <div class="activity-details">
+                                <p>Movie added: <strong>Interstellar</strong></p>
+                                <span class="activity-time">15 minutes ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class='bx bxs-tv'></i>
+                            </div>
+                            <div class="activity-details">
+                                <p>TV Show added: <strong>Stranger Things</strong></p>
+                                <span class="activity-time">25 minutes ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class='bx bxs-report'></i>
+                            </div>
+                            <div class="activity-details">
+                                <p>New report submitted for <strong>Pulp Fiction</strong></p>
+                                <span class="activity-time">1 hour ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class='bx bxs-user-x'></i>
+                            </div>
+                            <div class="activity-details">
+                                <p>User suspended: <strong>spammer123</strong></p>
+                                <span class="activity-time">3 hours ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Movies Tab -->
+            <div class="tab-content" id="movies-tab">
+                <div class="tab-header">
+                    <h2>Movie Management</h2>
+                    <button class="btn-primary" id="add-movie-btn">
+                        <i class='bx bx-plus'></i>
+                        Add New Movie
+                    </button>
+                </div>
+                
+                <div class="filters">
+                    <div class="search-filter">
+                        <input type="text" placeholder="Search movies..." id="movie-search">
+                        <i class='bx bx-search'></i>
+                    </div>
+                    <select id="genre-filter">
+                        <option value="">All Genres</option>
+                        <option value="Action">Action</option>
+                        <option value="Comedy">Comedy</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Sci-Fi">Sci-Fi</option>
+                        <option value="Horror">Horror</option>
+                        <option value="Romance">Romance</option>
+                    </select>
+                    <select id="status-filter">
+                        <option value="">All Statuses</option>
+                        <option value="active">Active</option>
+                        <option value="pending">Pending</option>
+                        <option value="archived">Archived</option>
+                    </select>
+                </div>
+                
+                <div class="movies-table-container">
+                    <table class="movies-table">
+                        <thead>
+                            <tr>
+                                <th>Poster</th>
+                                <th>Title</th>
+                                <th>Year</th>
+                                <th>Rating</th>
+                                <th>Genre</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="movies-table-body">
+                            <!-- Movies will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="pagination">
+                    <button class="pagination-btn" disabled>
+                        <i class='bx bx-chevron-left'></i>
+                    </button>
+                    <span class="page-info">Page 1 of 5</span>
+                    <button class="pagination-btn">
+                        <i class='bx bx-chevron-right'></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- TV Shows Tab -->
+            <div class="tab-content" id="tvshows-tab">
+                <div class="tab-header">
+                    <h2>TV Show Management</h2>
+                    <button class="btn-primary" id="add-tvshow-btn">
+                        <i class='bx bx-plus'></i>
+                        Add New TV Show
+                    </button>
+                </div>
+                
+                <div class="filters">
+                    <div class="search-filter">
+                        <input type="text" placeholder="Search TV shows..." id="tvshow-search">
+                        <i class='bx bx-search'></i>
+                    </div>
+                    <select id="tvshow-genre-filter">
+                        <option value="">All Genres</option>
+                        <option value="Action">Action</option>
+                        <option value="Comedy">Comedy</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Sci-Fi">Sci-Fi</option>
+                        <option value="Horror">Horror</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Crime">Crime</option>
+                        <option value="Fantasy">Fantasy</option>
+                    </select>
+                    <select id="tvshow-status-filter">
+                        <option value="">All Statuses</option>
+                        <option value="active">Active</option>
+                        <option value="pending">Pending</option>
+                        <option value="archived">Archived</option>
+                    </select>
+                </div>
+                
+                <div class="tvshows-table-container">
+                    <table class="tvshows-table">
+                        <thead>
+                            <tr>
+                                <th>Poster</th>
+                                <th>Title</th>
+                                <th>Year</th>
+                                <th>Seasons</th>
+                                <th>Rating</th>
+                                <th>Genre</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tvshows-table-body">
+                            <!-- TV Shows will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="pagination">
+                    <button class="pagination-btn" disabled>
+                        <i class='bx bx-chevron-left'></i>
+                    </button>
+                    <span class="page-info">Page 1 of 5</span>
+                    <button class="pagination-btn">
+                        <i class='bx bx-chevron-right'></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Users Tab -->
+            <div class="tab-content" id="users-tab">
+                <div class="tab-header">
+                    <h2>User Management</h2>
+                    <button class="btn-primary" id="add-user-btn">
+                        <i class='bx bx-plus'></i>
+                        Add New User
+                    </button>
+                </div>
+                
+                <div class="filters">
+                    <div class="search-filter">
+                        <input type="text" placeholder="Search users..." id="user-search">
+                        <i class='bx bx-search'></i>
+                    </div>
+                    <select id="role-filter">
+                        <option value="">All Roles</option>
+                        <option value="admin">Admin</option>
+                        <option value="moderator">Moderator</option>
+                        <option value="user">Regular User</option>
+                    </select>
+                    <select id="status-filter">
+                        <option value="">All Statuses</option>
+                        <option value="active">Active</option>
+                        <option value="suspended">Suspended</option>
+                        <option value="banned">Banned</option>
+                    </select>
+                </div>
+                
+                <div class="users-table-container">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Joined</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body">
+                            <!-- Users will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="pagination">
+                    <button class="pagination-btn" disabled>
+                        <i class='bx bx-chevron-left'></i>
+                    </button>
+                    <span class="page-info">Page 1 of 3</span>
+                    <button class="pagination-btn">
+                        <i class='bx bx-chevron-right'></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Reports Tab -->
+            <div class="tab-content" id="reports-tab">
+                <div class="tab-header">
+                    <h2>Content Reports</h2>
+                </div>
+                
+                <div class="filters">
+                    <div class="search-filter">
+                        <input type="text" placeholder="Search reports..." id="report-search">
+                        <i class='bx bx-search'></i>
+                    </div>
+                    <select id="report-type-filter">
+                        <option value="">All Types</option>
+                        <option value="spam">Spam</option>
+                        <option value="inappropriate">Inappropriate</option>
+                        <option value="copyright">Copyright</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <select id="report-status-filter">
+                        <option value="">All Statuses</option>
+                        <option value="pending">Pending</option>
+                        <option value="resolved">Resolved</option>
+                        <option value="dismissed">Dismissed</option>
+                    </select>
+                </div>
+                
+                <div class="reports-list">
+                    <div class="report-item">
+                        <div class="report-header">
+                            <div class="report-meta">
+                                <span class="report-type spam">Spam</span>
+                                <span class="report-status pending">Pending</span>
+                                <span class="report-date">2 hours ago</span>
+                            </div>
+                            <div class="report-actions">
+                                <button class="btn-icon" title="Resolve">
+                                    <i class='bx bx-check'></i>
+                                </button>
+                                <button class="btn-icon" title="Dismiss">
+                                    <i class='bx bx-x'></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="report-content">
+                            <p><strong>Reported by:</strong> user123@example.com</p>
+                            <p><strong>Content:</strong> Movie "Fight Club"</p>
+                            <p><strong>Reason:</strong> This movie contains inappropriate content that violates community guidelines.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="report-item">
+                        <div class="report-header">
+                            <div class="report-meta">
+                                <span class="report-type copyright">Copyright</span>
+                                <span class="report-status pending">Pending</span>
+                                <span class="report-date">5 hours ago</span>
+                            </div>
+                            <div class="report-actions">
+                                <button class="btn-icon" title="Resolve">
+                                    <i class='bx bx-check'></i>
+                                </button>
+                                <button class="btn-icon" title="Dismiss">
+                                    <i class='bx bx-x'></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="report-content">
+                            <p><strong>Reported by:</strong> copyright@studio.com</p>
+                            <p><strong>Content:</strong> Movie "The Dark Knight"</p>
+                            <p><strong>Reason:</strong> Unauthorized distribution of copyrighted material.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div class="tab-content" id="settings-tab">
+                <div class="tab-header">
+                    <h2>System Settings</h2>
+                </div>
+                
+                <div class="settings-tabs">
+                    <div class="settings-tab-nav">
+                        <button class="settings-tab-btn active" data-settings-tab="general">General</button>
+                        <button class="settings-tab-btn" data-settings-tab="email">Email</button>
+                        <button class="settings-tab-btn" data-settings-tab="security">Security</button>
+                        <button class="settings-tab-btn" data-settings-tab="maintenance">Maintenance</button>
+                    </div>
+                    
+                    <div class="settings-tab-content active" id="general-settings">
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label for="site-name">Site Name</label>
+                                <input type="text" id="site-name" value="CineVerse">
+                            </div>
+                            <div class="form-group">
+                                <label for="site-url">Site URL</label>
+                                <input type="url" id="site-url" value="https://cineverse.example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="default-theme">Default Theme</label>
+                                <select id="default-theme">
+                                    <option value="light">Light</option>
+                                    <option value="dark">Dark</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="items-per-page">Items Per Page</label>
+                                <input type="number" id="items-per-page" value="10" min="5" max="100">
+                            </div>
+                            <div class="form-group">
+                                <label for="logo-upload">Logo</label>
+                                <input type="file" id="logo-upload" accept="image/*">
+                            </div>
+                            <button type="submit" class="btn-primary">Save Settings</button>
+                        </form>
+                    </div>
+                    
+                    <div class="settings-tab-content" id="email-settings">
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label for="email-from">From Email</label>
+                                <input type="email" id="email-from" value="noreply@cineverse.example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="email-from-name">From Name</label>
+                                <input type="text" id="email-from-name" value="CineVerse">
+                            </div>
+                            <div class="form-group">
+                                <label for="smtp-host">SMTP Host</label>
+                                <input type="text" id="smtp-host" value="smtp.example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="smtp-port">SMTP Port</label>
+                                <input type="number" id="smtp-port" value="587">
+                            </div>
+                            <div class="form-group">
+                                <label for="smtp-username">SMTP Username</label>
+                                <input type="text" id="smtp-username" value="your_username">
+                            </div>
+                            <div class="form-group">
+                                <label for="smtp-password">SMTP Password</label>
+                                <input type="password" id="smtp-password" value="your_password">
+                            </div>
+                            <div class="form-group">
+                                <label for="smtp-security">SMTP Security</label>
+                                <select id="smtp-security">
+                                    <option value="tls">TLS</option>
+                                    <option value="ssl">SSL</option>
+                                    <option value="none">None</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn-primary">Save Settings</button>
+                        </form>
+                    </div>
+                    
+                    <div class="settings-tab-content" id="security-settings">
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label for="password-strength">Password Strength Requirement</label>
+                                <select id="password-strength">
+                                    <option value="low">Low (6+ characters)</option>
+                                    <option value="medium" selected>Medium (8+ characters with mix)</option>
+                                    <option value="high">High (12+ characters with complexity)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="two-factor">Two-Factor Authentication</label>
+                                <select id="two-factor">
+                                    <option value="optional">Optional</option>
+                                    <option value="required-admin">Required for Admins</option>
+                                    <option value="required-all">Required for All Users</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="failed-login">Failed Login Attempts Before Lockout</label>
+                                <input type="number" id="failed-login" value="5" min="1" max="10">
+                            </div>
+                            <div class="form-group">
+                                <label for="session-timeout">Session Timeout (minutes)</label>
+                                <input type="number" id="session-timeout" value="30" min="5" max="1440">
+                            </div>
+                            <div class="form-group">
+                                <label for="ip-restriction">IP Restriction</label>
+                                <select id="ip-restriction">
+                                    <option value="none">None</option>
+                                    <option value="admin-only">Admin Dashboard Only</option>
+                                    <option value="all">All Admin Areas</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="security-log">Enable Security Logging</label>
+                                <input type="checkbox" id="security-log" checked>
+                            </div>
+                            <button type="submit" class="btn-primary">Save Security Settings</button>
+                        </form>
+                    </div>
+                    
+                    <div class="settings-tab-content" id="maintenance-settings">
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label for="maintenance-mode">Maintenance Mode</label>
+                                <select id="maintenance-mode">
+                                    <option value="off">Off</option>
+                                    <option value="on">On (Admin access only)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="maintenance-message">Maintenance Message</label>
+                                <textarea id="maintenance-message" rows="4">We're currently performing scheduled maintenance. We'll be back shortly. Thank you for your patience.</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="backup-frequency">Automatic Backup Frequency</label>
+                                <select id="backup-frequency">
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly" selected>Weekly</option>
+                                    <option value="monthly">Monthly</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="backup-location">Backup Location</label>
+                                <input type="text" id="backup-location" value="/backups">
+                            </div>
+                            <div class="form-group">
+                                <label for="backup-now">Create Backup Now</label>
+                                <button type="button" id="backup-now" class="btn-secondary">Run Backup</button>
+                            </div>
+                            <div class="form-group">
+                                <label for="system-update">System Update</label>
+                                <div class="update-info">
+                                    <p>Current Version: 2.5.1</p>
+                                    <p>Latest Version: 2.6.0</p>
+                                    <button type="button" id="update-now" class="btn-secondary">Update Now</button>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-primary">Save Maintenance Settings</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Add Movie Modal -->
+        <div class="modal" id="add-movie-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Add New Movie</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="movie-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="movie-title">Title*</label>
+                                <input type="text" id="movie-title" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="movie-year">Year*</label>
+                                <input type="number" id="movie-year" min="1900" max="2099" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="movie-rating">Rating*</label>
+                                <input type="number" id="movie-rating" min="0" max="10" step="0.1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="movie-duration">Duration*</label>
+                                <input type="text" id="movie-duration" placeholder="e.g. 2h 30m" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="movie-genres">Genres*</label>
+                            <select id="movie-genres" multiple>
+                                <option value="Action">Action</option>
+                                <option value="Comedy">Comedy</option>
+                                <option value="Drama">Drama</option>
+                                <option value="Sci-Fi">Sci-Fi</option>
+                                <option value="Horror">Horror</option>
+                                <option value="Romance">Romance</option>
+                                <option value="Thriller">Thriller</option>
+                                <option value="Crime">Crime</option>
+                                <option value="Adventure">Adventure</option>
+                                <option value="Fantasy">Fantasy</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="movie-director">Director*</label>
+                            <input type="text" id="movie-director" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="movie-cast">Cast (comma separated)*</label>
+                            <input type="text" id="movie-cast" placeholder="e.g. Actor 1, Actor 2, Actor 3" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="movie-description">Description*</label>
+                            <textarea id="movie-description" rows="4" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="movie-trailer">Trailer URL*</label>
+                            <input type="url" id="movie-trailer" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="movie-poster">Poster Image*</label>
+                            <input type="file" id="movie-poster" accept="image/*" required>
+                            <div class="image-preview" id="poster-preview"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="movie-status">Status*</label>
+                            <select id="movie-status" required>
+                                <option value="active">Active</option>
+                                <option value="pending">Pending Review</option>
+                                <option value="draft">Draft</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary close-modal-btn">Cancel</button>
+                            <button type="submit" class="btn-primary">Save Movie</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add TV Show Modal -->
+        <div class="modal" id="add-tvshow-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Add New TV Show</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="tvshow-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="tvshow-title">Title*</label>
+                                <input type="text" id="tvshow-title" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tvshow-year">Year*</label>
+                                <input type="number" id="tvshow-year" min="1900" max="2099" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="tvshow-rating">Rating*</label>
+                                <input type="number" id="tvshow-rating" min="0" max="10" step="0.1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tvshow-seasons">Seasons*</label>
+                                <input type="number" id="tvshow-seasons" min="1" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tvshow-genres">Genres*</label>
+                            <select id="tvshow-genres" multiple>
+                                <option value="Action">Action</option>
+                                <option value="Comedy">Comedy</option>
+                                <option value="Drama">Drama</option>
+                                <option value="Sci-Fi">Sci-Fi</option>
+                                <option value="Horror">Horror</option>
+                                <option value="Romance">Romance</option>
+                                <option value="Thriller">Thriller</option>
+                                <option value="Crime">Crime</option>
+                                <option value="Adventure">Adventure</option>
+                                <option value="Fantasy">Fantasy</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tvshow-creator">Creator*</label>
+                            <input type="text" id="tvshow-creator" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tvshow-cast">Cast (comma separated)*</label>
+                            <input type="text" id="tvshow-cast" placeholder="e.g. Actor 1, Actor 2, Actor 3" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tvshow-description">Description*</label>
+                            <textarea id="tvshow-description" rows="4" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tvshow-trailer">Trailer URL*</label>
+                            <input type="url" id="tvshow-trailer" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tvshow-poster">Poster Image*</label>
+                            <input type="file" id="tvshow-poster" accept="image/*" required>
+                            <div class="image-preview" id="tvshow-poster-preview"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tvshow-status">Status*</label>
+                            <select id="tvshow-status" required>
+                                <option value="active">Active</option>
+                                <option value="pending">Pending Review</option>
+                                <option value="draft">Draft</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary close-modal-btn">Cancel</button>
+                            <button type="submit" class="btn-primary">Save TV Show</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add User Modal -->
+        <div class="modal" id="add-user-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Add New User</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="user-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="user-first-name">First Name*</label>
+                                <input type="text" id="user-first-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="user-last-name">Last Name*</label>
+                                <input type="text" id="user-last-name" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="user-email">Email*</label>
+                            <input type="email" id="user-email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="user-role">Role*</label>
+                            <select id="user-role" required>
+                                <option value="user">Regular User</option>
+                                <option value="moderator">Moderator</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="user-status">Status*</label>
+                            <select id="user-status" required>
+                                <option value="active">Active</option>
+                                <option value="suspended">Suspended</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="user-password">Password*</label>
+                            <input type="password" id="user-password" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="user-avatar">Avatar</label>
+                            <input type="file" id="user-avatar" accept="image/*">
+                            <div class="image-preview" id="avatar-preview"></div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary close-modal-btn">Cancel</button>
+                            <button type="submit" class="btn-primary">Save User</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Custom Notification -->
+        <div class="custom-notification" id="customNotification">
+            <div class="notification-content">
+                <p id="notificationMessage"></p>
+                <button class="close-notification">&times;</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/adashboard.js"></script>
+</body>
+</html>

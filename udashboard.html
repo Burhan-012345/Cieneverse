@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineVerse | Modern Movie Experience</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="css/udashboard.css">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Header/Navigation -->
+        <header class="header">
+            <nav class="nav">
+                <a href="#" class="logo">CineVerse</a>
+                <div class="nav-links">
+                    <a href="#" class="nav-link active" data-section="home">Home</a>
+                    <a href="#" class="nav-link" data-section="movies">Movies</a>
+                    <a href="#" class="nav-link" data-section="tv-shows">TV Shows</a>
+                    <a href="#" class="nav-link" data-section="genres">Genres</a>
+                    <a href="#" class="nav-link" data-section="my-list">My List</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="search-btn"><i class='bx bx-search'></i></button>
+                    <button class="theme-toggle"><i class='bx bx-moon'></i></button>
+                    <div class="user-dropdown">
+                        <button class="user-btn"><i class='bx bx-user'></i></button>
+                        <div class="dropdown-content">
+                            <div class="dropdown-header">
+                                <div class="profile-pic-container">
+                                    <img id="profile-pic" src="" alt="Profile Picture">
+                                    <label for="profile-upload" class="edit-profile-pic">
+                                        <i class='bx bx-camera'></i>
+                                        <input type="file" id="profile-upload" accept="image/*">
+                                    </label>
+                                </div>
+                                <div class="profile-info">
+                                    <h3 id="username-display">Guest</h3>
+                                    <p id="email-display">Not logged in</p>
+                                </div>
+                            </div>
+                            <div class="dropdown-body">
+                                <a href="#" class="dropdown-item" id="watchlist-dropdown-btn">
+                                    <i class='bx bx-bookmark'></i> My Watchlist
+                                </a>
+                                <a href="#" class="dropdown-item" id="settings-btn">
+                                    <i class='bx bx-cog'></i> Settings
+                                </a>
+                                <a href="#" class="dropdown-item" id="help-btn">
+                                    <i class='bx bx-help-circle'></i> Help & Support
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-item" id="logout-btn">
+                                    <i class='bx bx-log-out'></i> Logout
+                                </a>
+                                <a href="user-login.html" class="dropdown-item" id="login-btn">
+                                    <i class='bx bx-log-in'></i> Login
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Settings Modal -->
+        <div class="settings-modal" id="settingsModal">
+            <div class="settings-modal-content">
+                <span class="close-settings-modal">&times;</span>
+                <h2>Account Settings</h2>
+                <div class="settings-tabs">
+                    <button class="tab-btn active" data-tab="profile">Profile</button>
+                    <button class="tab-btn" data-tab="preferences">Preferences</button>
+                    <button class="tab-btn" data-tab="security">Security</button>
+                </div>
+                <div class="settings-tab-content active" id="profile-tab">
+                    <div class="form-group">
+                        <label for="settings-username">Username</label>
+                        <input type="text" id="settings-username" placeholder="Enter your username">
+                    </div>
+                    <div class="form-group">
+                        <label for="settings-email">Email</label>
+                        <input type="email" id="settings-email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label>Profile Picture</label>
+                        <div class="profile-pic-upload">
+                            <img id="settings-profile-pic" src="" alt="Profile Picture">
+                            <label for="settings-profile-upload" class="upload-btn">
+                                <i class='bx bx-cloud-upload'></i> Change Photo
+                                <input type="file" id="settings-profile-upload" accept="image/*">
+                            </label>
+                        </div>
+                    </div>
+                    <button class="save-btn" id="save-profile">Save Changes</button>
+                </div>
+                <div class="settings-tab-content" id="preferences-tab">
+                    <div class="form-group">
+                        <label>Theme Preference</label>
+                        <div class="theme-options">
+                            <button class="theme-option" data-theme="light">
+                                <i class='bx bx-sun'></i> Light
+                            </button>
+                            <button class="theme-option" data-theme="dark">
+                                <i class='bx bx-moon'></i> Dark
+                            </button>
+                            <button class="theme-option" data-theme="system">
+                                <i class='bx bx-desktop'></i> System
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Notification Preferences</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="email-notifications" checked>
+                                <span class="checkmark"></span>
+                                Email Notifications
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="push-notifications" checked>
+                                <span class="checkmark"></span>
+                                Push Notifications
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="new-releases">
+                                <span class="checkmark"></span>
+                                New Releases
+                            </label>
+                        </div>
+                    </div>
+                    <button class="save-btn" id="save-preferences">Save Preferences</button>
+                </div>
+                <div class="settings-tab-content" id="security-tab">
+                    <div class="form-group">
+                        <label for="current-password">Current Password</label>
+                        <input type="password" id="current-password" placeholder="Enter current password">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">New Password</label>
+                        <input type="password" id="new-password" placeholder="Enter new password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" placeholder="Confirm new password">
+                    </div>
+                    <button class="save-btn" id="save-password">Change Password</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Help Modal -->
+        <div class="help-modal" id="helpModal">
+            <div class="help-modal-content">
+                <span class="close-help-modal">&times;</span>
+                <h2>Help & Support</h2>
+                <div class="help-sections">
+                    <div class="help-section">
+                        <h3><i class='bx bx-help-circle'></i> Frequently Asked Questions</h3>
+                        <div class="faq-item">
+                            <button class="faq-question">How do I add movies to my watchlist?</button>
+                            <div class="faq-answer">
+                                <p>Click on any movie to open its details, then click the "Add to Watchlist" button. You need to be logged in to use this feature.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">How can I change my account settings?</button>
+                            <div class="faq-answer">
+                                <p>Click on your profile icon in the top right corner, then select "Settings" from the dropdown menu.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">How do I change the theme?</button>
+                            <div class="faq-answer">
+                                <p>You can toggle between light and dark mode using the theme toggle button in the header, or set your preference in the Settings under Preferences.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="help-section">
+                        <h3><i class='bx bx-envelope'></i> Contact Support</h3>
+                        <p>If you need further assistance, please contact our support team:</p>
+                        <div class="contact-methods">
+                            <a href="mailto:support@cineverse.com" class="contact-method">
+                                <i class='bx bx-mail-send'></i> Email Us
+                            </a>
+                            <a href="tel:+1234567890" class="contact-method">
+                                <i class='bx bx-phone'></i> Call Support
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="hero" id="home-section">
+            <div class="hero-content">
+                <h1 class="hero-title">Explore Limitless Entertainment</h1>
+                <p class="hero-subtitle">Discover your next favorite movie among thousands of titles</p>
+                <div class="search-box">
+                    <input type="text" placeholder="Search for movies, TV shows...">
+                    <button class="search-btn"><i class='bx bx-search'></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Movies -->
+        <section class="featured-section" id="movies-section">
+            <h2 class="section-title">Featured Movies</h2>
+            <div class="movies-grid">
+                <!-- Movie cards will be added dynamically by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Popular Movies -->
+        <section class="popular-section">
+            <div class="section-header">
+                <h2 class="section-title">Popular Now</h2>
+                <a href="#" class="view-all">View All</a>
+            </div>
+            <div class="movies-slider">
+                <!-- Movie cards will be added dynamically by JavaScript -->
+            </div>
+        </section>
+
+        <!-- TV Shows Section -->
+        <section class="tv-shows-section" id="tv-shows-section">
+            <div class="section-header">
+                <h2 class="section-title">Popular TV Shows</h2>
+                <a href="#" class="view-all">View All</a>
+            </div>
+            <div class="tv-shows-grid">
+                <!-- TV Show cards will be added dynamically by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Genres Section -->
+        <section class="genres-section" id="genres-section">
+            <h2 class="section-title">Browse by Genre</h2>
+            <div class="genres-grid">
+                <div class="genre-card" data-genre="action">
+                    <i class='bx bx-run'></i>
+                    <h3>Action</h3>
+                </div>
+                <div class="genre-card" data-genre="comedy">
+                    <i class='bx bx-laugh'></i>
+                    <h3>Comedy</h3>
+                </div>
+                <div class="genre-card" data-genre="drama">
+                    <i class='bx bx-theater'></i>
+                    <h3>Drama</h3>
+                </div>
+                <div class="genre-card" data-genre="horror">
+                    <i class='bx bx-ghost'></i>
+                    <h3>Horror</h3>
+                </div>
+                <div class="genre-card" data-genre="sci-fi">
+                    <i class='bx bx-planet'></i>
+                    <h3>Sci-Fi</h3>
+                </div>
+                <div class="genre-card" data-genre="romance">
+                    <i class='bx bx-heart'></i>
+                    <h3>Romance</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- My List Section -->
+        <section class="my-list-section" id="my-list-section">
+            <h2 class="section-title">My Watchlist</h2>
+            <div class="watchlist-grid">
+                <!-- Watchlist items will be added dynamically by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">CineVerse</div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h3>Company</h3>
+                        <a href="#">About Us</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Contact</a>
+                    </div>
+                    <div class="link-group">
+                        <h3>Legal</h3>
+                        <a href="#">Terms of Use</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                    <div class="link-group">
+                        <h3>Support</h3>
+                        <a href="#">Help Center</a>
+                        <a href="#">FAQ</a>
+                        <a href="#">Feedback</a>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class='bx bxl-facebook'></i></a>
+                    <a href="#"><i class='bx bxl-twitter'></i></a>
+                    <a href="#"><i class='bx bxl-instagram'></i></a>
+                    <a href="#"><i class='bx bxl-youtube'></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 CineVerse. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Movie Details Modal -->
+    <div class="movie-modal" id="movieModal">
+        <div class="movie-modal-content">
+            <span class="close-movie-modal">&times;</span>
+            <div class="movie-modal-body">
+                <!-- Content will be filled by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Notification -->
+    <div class="notification" id="loginNotification">
+        <p>Please login to add movies to your watchlist</p>
+        <button id="loginRedirect">Login Now</button>
+    </div>
+
+    <script src="js/udashboard.js"></script>
+</body>
+</html>

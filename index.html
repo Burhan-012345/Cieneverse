@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Register form</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <span class="rotate-bg"></span>
+        <span class="rotate-bg2"></span>
+
+        <!-- Custom Alert Container -->
+        <div class="alert-container">
+            <div class="alert-message success">
+                <span class="alert-text"></span>
+                <i class='bx bx-x alert-close'></i>
+            </div>
+        </div>
+
+        <div class="form-box login">
+            <h2 class="title animation" style="--i:0; --j:21">Login</h2>
+            <form action="#">
+                <div class="input-box animation" style="--i:1; --j:22">
+                    <input type="text" required class="username-input">
+                    <label for="">Username</label>
+                    <i class='bx bxs-user'></i>
+                    <span class="validation-message username-message"></span>
+                </div>
+
+                <div class="input-box animation" style="--i:2; --j:23">
+                    <input type="password" required class="password-input">
+                    <label for="">Password</label>
+                    <i class='bx bxs-lock-alt'></i>
+                    <i class='bx bxs-hide toggle-password'></i>
+                    <span class="validation-message password-message"></span>
+                </div>
+
+                <div class="forgot-password animation" style="--i:3; --j:24">
+                    <a href="#" class="forgot-password-link">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn animation" style="--i:4; --j:25">
+                    <span class="btn-text">Login</span>
+                    <div class="btn-loader hidden">
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                    </div>
+                </button>
+
+                <div class="linkTxt animation" style="--i:5; --j:26">
+                    <p>Don't have an account? <a href="#" class="register-link">Sign Up</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="info-text login">
+            <h2 class="animation" style="--i:0; --j:20">Welcome Back!</h2>
+            <p class="animation" style="--i:1; --j:21">Sign in to access your personalized movie recommendations, watchlist, and account settings.</p>
+        </div>
+
+        <div class="form-box register">
+            <h2 class="title animation" style="--i:17; --j:0">Sign Up</h2>
+            <form action="#">
+                <div class="input-box animation" style="--i:18; --j:1">
+                    <input type="text" required class="userid-input" readonly>
+                    <label for="">User ID</label>
+                    <i class='bx bxs-id-card'></i>
+                    <span class="validation-message userid-message"></span>
+                </div>
+
+                <div class="input-box animation" style="--i:19; --j:2">
+                    <input type="text" required class="username-input">
+                    <label for="">Username</label>
+                    <i class='bx bxs-user'></i>
+                    <span class="validation-message username-message"></span>
+                </div>
+
+                <div class="input-box animation" style="--i:20; --j:3">
+                    <input type="email" required class="email-input">
+                    <label for="">Email</label>
+                    <i class='bx bxs-envelope'></i>
+                    <span class="validation-message email-message"></span>
+                </div>
+
+                <div class="input-box animation" style="--i:21; --j:4">
+                    <input type="password" required class="password-input">
+                    <label for="">Password</label>
+                    <i class='bx bxs-lock-alt'></i>
+                    <i class='bx bxs-hide toggle-password'></i>
+                    <span class="validation-message password-message"></span>
+                </div>
+
+                <button type="submit" class="btn animation" style="--i:22;--j:5">
+                    <span class="btn-text">Create Account</span>
+                    <div class="btn-loader hidden">
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                    </div>
+                </button>
+
+                <div class="linkTxt animation" style="--i:23; --j:6">
+                    <p>Already have an account? <a href="#" class="login-link">Login</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="info-text register">
+            <h2 class="animation" style="--i:17; --j:0;">Join Our Community!</h2>
+            <p class="animation" style="--i:18; --j:1;">Create an account to unlock exclusive features, save your favorite movies, and get personalized recommendations.</p>
+        </div>
+
+        <div class="form-box forgot-password">
+            <h2 class="title animation" style="--i:34; --j:0">Reset Password</h2>
+            <form action="#">
+                <div class="input-box animation" style="--i:35; --j:1">
+                    <input type="text" required class="userid-input">
+                    <label for="">User ID</label>
+                    <i class='bx bxs-id-card'></i>
+                    <span class="validation-message userid-message"></span>
+                </div>
+
+                <div class="input-box animation" style="--i:36; --j:2">
+                    <input type="text" required class="username-input">
+                    <label for="">Username</label>
+                    <i class='bx bxs-user'></i>
+                    <span class="validation-message username-message"></span>
+                </div>
+
+                <div class="input-box animation" style="--i:37; --j:3">
+                    <input type="password" required class="new-password-input">
+                    <label for="">New Password</label>
+                    <i class='bx bxs-lock-alt'></i>
+                    <i class='bx bxs-hide toggle-password'></i>
+                    <span class="validation-message new-password-message"></span>
+                </div>
+
+                <div class="input-box animation" style="--i:38; --j:4">
+                    <input type="password" required class="confirm-password-input">
+                    <label for="">Confirm Password</label>
+                    <i class='bx bxs-lock-alt'></i>
+                    <i class='bx bxs-hide toggle-password'></i>
+                    <span class="validation-message confirm-password-message"></span>
+                </div>
+
+                <button type="submit" class="btn animation" style="--i:39;--j:5">
+                    <span class="btn-text">Reset Password</span>
+                    <div class="btn-loader hidden">
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                    </div>
+                </button>
+
+                <div class="linkTxt animation" style="--i:40; --j:6">
+                    <p>Remember your password? <a href="#" class="login-link">Login</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="info-text forgot-password">
+            <h2 class="animation" style="--i:34; --j:0;">Having Trouble?</h2>
+            <p class="animation" style="--i:35; --j:1;">Enter your User ID and username to reset your password. Make sure to create a strong new password.</p>
+        </div>
+    </div>
+
+    <!--Script.js-->
+    <script src="js/script.js"></script>
+</body>
+</html>
